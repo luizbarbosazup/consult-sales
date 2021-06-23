@@ -28,4 +28,22 @@ class SaleRepositoryImpl(val cqlSession: CqlSession):SaleRepository {
         return saleList
 
     }
+
+    override fun findSaleById(saleId:UUID): Sale? {
+        val result:ResultSet = cqlSession.execute(
+            SimpleStatement
+                .newInstance(
+                    "SELECT * FROM pdvdata.sale WHERE id = ?",
+                    saleId
+                )
+        )
+        if( result.one() == null) return null
+
+        return Sale(
+            result.one()!!.getUuid("id")!!,
+            result.one()!!.getUuid("productid")!!,
+            result.one()!!.getDouble("qty")
+        )
+
+    }
 }
