@@ -3,8 +3,7 @@ micronaut:
     name: apivendaConsulta
   server:
     port: 8082
-nats.addresses:
-- nats://localhost:4222
+
 cassandra:
   default:
     clusterName: mycluster

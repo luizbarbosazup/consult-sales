@@ -6,8 +6,10 @@ import com.datastax.oss.driver.api.core.cql.ResultSet
 import com.datastax.oss.driver.api.core.cql.Row
 import com.datastax.oss.driver.api.core.cql.SimpleStatement
 import java.util.*
+import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
+@Singleton
 class SaleRepositoryImpl(val cqlSession: CqlSession):SaleRepository {
 
     override fun listAll(): List<Sale> {
@@ -37,13 +39,18 @@ class SaleRepositoryImpl(val cqlSession: CqlSession):SaleRepository {
                     saleId
                 )
         )
-        if( result.one() == null) return null
 
-        return Sale(
-            result.one()!!.getUuid("id")!!,
-            result.one()!!.getUuid("productid")!!,
-            result.one()!!.getDouble("qty")
-        )
 
+        val row:Row? = result.one()
+        if( row != null){
+
+            return Sale(
+                row.getUuid("id")!!,
+                row.getUuid("productid")!!,
+                row.getDouble("qty")
+            )
+        }
+
+        return null
     }
 }
