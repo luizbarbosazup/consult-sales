@@ -1,0 +1,15 @@
+micronaut:
+  application:
+    name: apivendaConsulta
+  server:
+    port: 8082
+nats.addresses:
+- nats://localhost:4222
+cassandra:
+  default:
+    clusterName: mycluster
+    session-keyspace: pdvdata
+    contactPoint: 127.0.0.1
+    port: 9042
+    maxSchemaAgreementWaitSeconds: 20
+    ssl: true
