@@ -1,6 +1,5 @@
 package br.com.iupp.apivenda.controller
 
-import br.com.iupp.apivenda.controller.DTO.SaleResponse
 import br.com.iupp.apivenda.model.Sale
 import br.com.iupp.apivenda.service.SaleService
 import io.micronaut.http.HttpResponse
